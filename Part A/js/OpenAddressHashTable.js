@@ -1,10 +1,11 @@
-class KeyValuePair {
+class KeyValuePair {//hjerherh
     constructor(initKey, initValue) {
         this.key = initKey;
         this.value = initValue;
     }
     
     toString() {
+        console.log("TESTER");
         return "(" + this.key + ", " + this.value.toString() + ")";
     }
 }
