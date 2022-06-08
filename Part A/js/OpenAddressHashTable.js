@@ -48,6 +48,35 @@ export default class OpenAddressHashTable {
     
     // @todo - YOU MUST DEFINE THIS METHOD
     getValue(key) {
+        let index = this.hashCode(key);
+        if(this.hashTable[index] === null)
+        {
+            if(this.hashTable[index].key === key)
+            {
+                return this.hashTable[index];
+            }
+        }   
+        //wrap if it isn't there
+        for(let i = index; i < this.hashTable.length; i++)
+        {
+            if(this.hashTable[i] !== null)
+            {
+                if(this.hashTable[index].key === key )
+                {
+                    return this.hashTable[index];
+                }
+            }
+        }
+        for(let i = 0; i < index; i++)
+        {
+            if(this.hashTable[i] !== null)
+            {
+                if(this.hashTable[index].key === key)
+                {
+                    return this.hashTable[index];
+                }
+            }
+        }
         return null;
     }
     
@@ -57,7 +86,9 @@ export default class OpenAddressHashTable {
 
     // @todo - YOU MUST DEFINE THIS METHOD
     putValue(key, item) {
-
+        let newKeyValuePair = new KeyValuePair(key, item);
+        let index = this.hashCode(key);
+        this.hashTable[index] = newKeyValuePair;
     }
     
     toString() {
