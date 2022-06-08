@@ -47,11 +47,11 @@ console.log("\nget " + cwKey + ": " + p.toString() + "\n");
 p = hashTable.getValue(dgKey);
 console.log("\nget " + dgKey + ": " + p.toString() + "\n");
 
-//NOW LET'S TRY REPLACING THE DATA IN THE ABOVE THREE
-hashTable.putValue(jlKey, new Student(jlKey, "Otis", "Redding", 3.5));
-hashTable.putValue(cwKey, new Student(cwKey, "Keith", "Richards", 3.1));
-hashTable.putValue(dgKey, new Student(dgKey, "Bill", "Withers", 3.4));
-printHashTable("\nAfter Changing 3 Items", hashTable);
+// //NOW LET'S TRY REPLACING THE DATA IN THE ABOVE THREE
+// hashTable.putValue(jlKey, new Student(jlKey, "Otis", "Redding", 3.5));
+// hashTable.putValue(cwKey, new Student(cwKey, "Keith", "Richards", 3.1));
+// hashTable.putValue(dgKey, new Student(dgKey, "Bill", "Withers", 3.4));
+// printHashTable("\nAfter Changing 3 Items", hashTable);
 
 // // AND DEMONSTRATE REMOVING ITEMS FROM THE BST
 // hashTable.removeValue(jlKey);

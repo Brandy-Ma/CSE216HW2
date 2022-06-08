@@ -47,21 +47,20 @@ export default class OpenAddressHashTable {
     
     // @todo - YOU MUST DEFINE THIS METHOD
     getValue(key) {
-        let temKey = key;
         let index = this.hashCode(key);
         if(this.hashTable[index] != null)
         {
-            if(this.hashTable[index].key === temKey)
+            if(this.hashTable[index].key === key)
             {
                 return this.hashTable[index];
             }
         }   
         //wrap if it isn't there
-        for(let i = index; i < this.hashTable.length; i++)
+        for(let i = index; i < this.length; i++)
         {
             if(this.hashTable[i] != null)
             {
-                if(this.hashTable[i].key === temKey )
+                if(this.hashTable[i].key === key )
                 {
                     return this.hashTable[i];
                 }
@@ -71,7 +70,7 @@ export default class OpenAddressHashTable {
         {
             if(this.hashTable[i] != null)
             {
-                if(this.hashTable[i].key === temKey)
+                if(this.hashTable[i].key === key)
                 {
                     return this.hashTable[i];
                 }
@@ -90,11 +89,11 @@ export default class OpenAddressHashTable {
         let index = this.hashCode(key);
         if(this.getValue(newKeyValuePair.key) != null)
         {
-            for(let i = 0; i<this.hashTable.length; i++)
+            for(let i = 0; i<this.length; i++)
             {
                 if(this.hashTable[i] != null)
                 {
-                    if(this.hashTable[i].key === key)
+                    if(this.hashTable[i].key == key)
                     {
                         this.hashTable[i] = newKeyValuePair;
                     }
@@ -102,19 +101,12 @@ export default class OpenAddressHashTable {
             }
         }
         //if value doesn't exist you start from hashindex until future
-        // from index to length
-        if(this.hashTable[index] == null)
-        {
-            this.hashTable[index] = newKeyValuePair;
-            this.size = this.size + 1;
-            return;
-        }
         // index -> end
-        for(let i = index; i<this.hashTable.length; i++)
+        for(let i = index; i<this.length; i++)
         {
             if(this.hashTable[i]==null)
             {
-                this.hashTable[i] == newKeyValuePair;
+                this.hashTable[i] = newKeyValuePair;
                 this.size = this.size + 1;
                 return;
             }
@@ -124,17 +116,17 @@ export default class OpenAddressHashTable {
         {
             if(this.hashTable[i]==null)
             {
-                this.hashTable[i] == newKeyValuePair;
+                this.hashTable[i] = newKeyValuePair;
                 this.size = this.size + 1;
                 return;
             }
         }
         if(this.size === this.length)
         {
-            rehashTable();
+            this.rehashTable();
             this.putValue(key,item);
         }
-        this.hashTable[index] = newKeyValuePair;
+
     }
 
     rehashTable()
@@ -150,7 +142,7 @@ export default class OpenAddressHashTable {
                 let newHashCode = this.hashCode(this.hashTable[i].key);
                 if(hashTableNew[newHashCode]==null)
                 {
-                    hashTableNew = this.hashTable[i];
+                    hashTableNew[newHashCode] = this.hashTable[i];
                     nullSpotFound = false;
                 }
                 //if spot isn't empty linearly probe
