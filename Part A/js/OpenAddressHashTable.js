@@ -80,6 +80,7 @@ export default class OpenAddressHashTable {
     }
     
     // @todo - YOU MUST DEFINE THIS METHOD
+    // ADDED THIS METHOD
     removeValue(key) {   
         if(this.getValue(key) != null)
         {
@@ -169,7 +170,7 @@ export default class OpenAddressHashTable {
         }
         //if value doesn't exist you start from hashindex until future
         // index -> end
-        for(let i = index; i<this.length; i++)
+        for(let i = index; i<this.length; i++) //THis was added before just gotta recomitt it
         {
             if(this.hashTable[i]==null)
             {
