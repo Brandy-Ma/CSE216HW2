@@ -81,6 +81,72 @@ export default class OpenAddressHashTable {
     
     // @todo - YOU MUST DEFINE THIS METHOD
     removeValue(key) {   
+        if(this.getValue(key) != null)
+        {
+            for(let i = 0; i<this.length; i++)
+            {
+                if(this.hashTable[i] != null)
+                {
+                    if(this.hashTable[i].key == key)
+                    {
+                        this.hashTable[i] = null;
+                        this.rehashTableDelete();
+                        this.size = this.size - 1;
+                        return;
+                    }
+                }
+            }
+        }
+
+    }
+    rehashTableDelete()
+    {
+        let hashTableNew = [];
+        for(let i=0; i<this.length; i++)
+        {
+            if(this.hashTable[i] != null)
+            {
+                let nullSpotFound = true;
+                let newHashCode = this.hashCode(this.hashTable[i].key);
+                if(hashTableNew[newHashCode]==null)
+                {
+                    hashTableNew[newHashCode] = this.hashTable[i];
+                    nullSpotFound = false;
+                }
+                //if spot isn't empty linearly probe
+                if(nullSpotFound)
+                {
+                    for(let j = newHashCode; j<this.length; j++)
+                    {
+                        if(nullSpotFound)
+                        {
+                            if(hashTableNew[j] == null)
+                            {
+                                hashTableNew[j] = this.hashTable[i];
+                                nullSpotFound = false;
+                            }
+                        }
+                    }
+                }
+                //if still not found restart from beginning to new hash code
+                if(nullSpotFound)
+                {
+                    for(let j = 0; j < newHashCode; j++)
+                    {
+                        if(nullSpotFound)
+                        {
+                            if(hashTableNew[j] == null)
+                            {
+                                hashTableNew[j] = this.hashTable[i];
+                                nullSpotFound = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        this.hashTable = hashTableNew;
+
     }
 
     // @todo - YOU MUST DEFINE THIS METHOD
@@ -96,6 +162,7 @@ export default class OpenAddressHashTable {
                     if(this.hashTable[i].key == key)
                     {
                         this.hashTable[i] = newKeyValuePair;
+                        return;
                     }
                 }
             }
