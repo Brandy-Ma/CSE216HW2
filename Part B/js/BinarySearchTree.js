@@ -24,7 +24,7 @@ export default class BinarySearchTree {
             randomChar = String.fromCharCode(97+ randomNum);
             key += randomChar;
         }
-        console.log(key);
+        // console.log(key);
         return key;
     }
 
@@ -75,7 +75,40 @@ export default class BinarySearchTree {
 
     // @todo - YOU MUST DEFINE THIS METHOD
     getValue(key) {
+        //if the root isn't initalized stop
+        if(this.root == null)
+        {
+            return null;
+        }
+        else
+        {
+            return this.getValueHelper(key, this.root);
+        }
         return null;
+    }
+
+    getValueHelper(initKey, initNode)
+    {
+        //if node doesn't exist stop
+        if(initNode == null)
+        {
+            return null;
+        }
+        //if node key is equal
+        else if(initNode.key == initKey)
+        {
+            return initNode.data;
+        }
+        //if node key is smaller
+        else if(initNode.key < initKey)
+        {
+            return this.getValueHelper(initKey, initNode.left);
+        }
+        //else the key is bigger
+        else
+        {
+            return this.getValueHelper(initKey, initNode.right);
+        }
     }
 
     // @todo - YOU MUST DEFINE THIS METHOD
