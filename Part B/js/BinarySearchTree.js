@@ -1,8 +1,8 @@
 class Node {
-    constructor(initKey, initData, initParent, initLeft, initRight) {
+    constructor(initKey, initData, initLeft, initRight) {
         this.key = initKey;
         this.data = initData;
-        this.parent = initParent;
+        //this.parent = initParent;
         this.left = initLeft;
         this.right = initRight;
     }
@@ -30,6 +30,46 @@ export default class BinarySearchTree {
 
     // @todo - YOU MUST DEFINE THIS METHOD
     putValue(key, value) {
+        //add node if the root is empty
+        if(this.root == null)
+        {
+            this.root = new Node(key, value, null, null);
+            this.size = this.size + 1;
+            return;
+        }
+        else
+        {
+            this.root = this.putValueHelper(key, value, this.root);
+        }
+
+    }
+    //putvalueHelper
+    putValueHelper(initKey, initData, initNode)
+    {
+        //if it is a leaf
+        if(initNode == null)
+        {
+            this.size = this.size + 1;
+            initNode = new Node(initKey, initData, null, null);
+            return initNode;
+        }
+        //if found replace 
+        if(initNode.key == initKey)
+        {
+            initNode.data = initData;
+            return initNode;
+        }
+        //if key is smaller go left
+        if(initNode.key < initKey)
+        {
+            initNode.left = this.putValueHelper(initKey, initData, initNode.left);
+        }
+        //else key is bigger go right
+        else
+        {
+            initNode.right = this.putValueHelper(initKey, initData, initNode.right);
+        }
+        return initNode;
 
     }
 
