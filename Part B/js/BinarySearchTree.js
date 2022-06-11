@@ -19,18 +19,12 @@ export default class BinarySearchTree {
     generateKey() {
         let key = "";
         for (let i = 0; i < this.keyLength; i++) {
-            let randomNum = Math.floor(Math.random() * 36);
+            let randomNum = Math.floor(Math.random() * 26);
             let randomChar;
-            if (randomNum < 10) {
-                randomNum += 48;
-                randomChar = String.fromCharCode(randomNum);
-            }
-            else {
-                randomNum += 55;
-                randomChar = String.fromCharCode(randomNum);
-            }
+            randomChar = String.fromCharCode(97+ randomNum);
             key += randomChar;
         }
+        console.log(key);
         return key;
     }
 
