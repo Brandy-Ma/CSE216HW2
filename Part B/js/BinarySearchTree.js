@@ -60,7 +60,7 @@ export default class BinarySearchTree {
             return initNode;
         }
         //if key is smaller go left
-        if(initNode.key < initKey)
+        if(initKey < initNode.key)
         {
             initNode.left = this.putValueHelper(initKey, initData, initNode.left);
         }
@@ -100,7 +100,7 @@ export default class BinarySearchTree {
             return initNode.data;
         }
         //if node key is smaller
-        else if(initNode.key < initKey)
+        else if(initKey < initNode.key )
         {
             return this.getValueHelper(initKey, initNode.left);
         }
@@ -113,7 +113,78 @@ export default class BinarySearchTree {
 
     // @todo - YOU MUST DEFINE THIS METHOD
     removeValue(key) {
+        //if you cant get the node stop
+        if(this.getValue(key) != null)
+        {
+            this.root = this.removeHelper(key, this.root);
+            this.size = this.size - 1;
+        }
+    }
 
+    removeHelper(key, initNode)
+    {
+        //if node is null(base case)
+        if(initNode == null)
+        {
+            return null;
+        }
+        //check left 
+        else if(key < initNode.key )
+        {
+            initNode.left = this.removeHelper(key, initNode.left);
+            return initNode;
+        }
+        //check right
+        else if(key > initNode.key  )
+        {
+            initNode.right = this.removeHelper(key, initNode.right);
+            return initNode;
+        }
+        //if it passes this then the node is the key
+        //check whether the node has a single child
+        if(initNode.left == null)
+        {
+            return initNode.right;
+        }
+        else if(initNode.right == null)
+        {
+            return initNode.left;
+        }
+        //if passes all thes cases the node has no children
+        else
+        {
+            let tempNodeParent = initNode;
+            if(initNode.left == null)
+            {
+                tempNodeParent = initNode.right;
+            }
+            else if(initNode.right == null)
+            {
+                tempNodeParent = initNode.left;
+            }
+            else
+            {
+                //find the largst on the left
+                let tempRemovenode = this.findMaxNode(initNode.left)
+                tempNodeParent.data = tempRemovenode.data;
+                tempNodeParent.key = tempRemovenode.key; 
+                initNode.left = this.removeNodeSecond(initNode.left, tempRemovenode.key);
+            }
+            return tempNodeParent;
+        }
+    }
+    findMaxNode(initNode)
+    {
+        let tempNode = initNode;
+        while(tempNode.right != null)
+        {
+            tempNode = tempNode.right;
+        }
+        return tempNode;
+    }
+    removeNodeSecond(initNode, initKey)
+    {
+        return this.removeHelper(initNode, initKey);
     }
 
     toStringRecursively(traveller, level) {
