@@ -62,3 +62,26 @@ printHashTable("\nAfter Removing Keith Richards", hashTable);
 
 hashTable.removeValue(dgKey);
 printHashTable("\nAfter Removing Bill Withers", hashTable);
+
+hashTable = new OpenAddressHashTable(NUM_BINS, KEY_LENGTH);
+hashTable.putValue("vilpotae", new Student("vilpotae", "George", "Harrison", 4.0), hashTable);
+hashTable.putValue("vilpotae", new Employee("keusmvoe", "Paul", "McCartney", 80000), hashTable);
+hashTable.putValue("vilpotae", new Employee("pzoaufcv", "Ringo", "Starr", 40000), hashTable);
+hashTable.putValue("vilpotae", new Person("aeumdcsi", "Chuck", "Berry"), hashTable);
+hashTable.putValue("vilpotae", new Student("sjeifvma", "Mick", "Jagger", 3.5), hashTable);
+hashTable.putValue("vilpotae", new Student("zeuqhsmv", "Jimi", "Hendrix", 3.6), hashTable);
+hashTable.putValue("vilpotae", new Person("peoqjeis", "Roger", "Waters"), hashTable);
+
+printHashTable("\nReseting and adding new things", hashTable);
+
+hashTable.putValue("vilpotae", new Employee("keusmvoe", "Paul", "McCartney", 80000), hashTable);
+hashTable.putValue("pzoaufcv", new Employee("pzoaufcv", "Ringo", "Starr", 40000), hashTable);
+hashTable.putValue("aeumdcsi", new Person("aeumdcsi", "Chuck", "Berry"), hashTable);
+hashTable.putValue("sjeifvma", new Student("sjeifvma", "Mick", "Jagger", 3.5), hashTable);
+hashTable.putValue("zeuqhsmv", new Student("zeuqhsmv", "Jimi", "Hendrix", 3.6), hashTable);
+hashTable.putValue("peoqjeis", new Person("peoqjeis", "Roger", "Waters"), hashTable);
+
+printHashTable("\n adding new things correctly", hashTable);
+
+hashTable.removeValue("sjeifvma");
+printHashTable("\nRemoving one value", hashTable);
