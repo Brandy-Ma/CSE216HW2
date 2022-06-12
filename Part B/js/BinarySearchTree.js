@@ -114,11 +114,13 @@ export default class BinarySearchTree {
     // @todo - YOU MUST DEFINE THIS METHOD
     removeValue(key) {
         //if you cant get the node stop
-        if(this.getValue(key) != null)
+        if(this.getValue(key)== null)
         {
-            this.root = this.removeHelper(key, this.root);
-            this.size = this.size - 1;
+            return;
         }
+        this.root = this.removeHelper(key, this.root);
+        this.size = this.size - 1;
+
     }
 
     removeHelper(key, initNode)
@@ -126,66 +128,94 @@ export default class BinarySearchTree {
         //if node is null(base case)
         if(initNode == null)
         {
-            return null;
+            return initNode;
         }
-        //check left 
+        //check if the key is this node
+        if(key == initNode.key)
+        {
+            //check if it has no children
+            if(initNode.left == null && initNode.right == null)
+            {
+                return null;
+            }
+            //check if it has 1 child
+            else if(initNode.left == null)
+            {
+                return initNode.right;
+            }
+            else if(initNode.right == null)
+            {
+                return initNode.left;
+            }
+            //else it has both children
+            else
+            {
+            //find the largst on the left
+            let tempRemovenode = this.findMinNode(initNode.right);
+            initNode.data = tempRemovenode.data;
+            initNode.key = tempRemovenode.key; 
+            initNode.right = this.removeHelper(tempRemovenode.key, initNode.right);
+            return initNode;   
+            }
+        }
+        // //check left 
         else if(key < initNode.key )
         {
             initNode.left = this.removeHelper(key, initNode.left);
             return initNode;
         }
-        //check right
+        // //check right
         else if(key > initNode.key  )
         {
             initNode.right = this.removeHelper(key, initNode.right);
             return initNode;
         }
-        //if it passes this then the node is the key
-        //check whether the node has a single child
-        if(initNode.left == null)
-        {
-            return initNode.right;
-        }
-        else if(initNode.right == null)
-        {
-            return initNode.left;
-        }
-        //if passes all thes cases the node has no children
-        else
-        {
-            let tempNodeParent = initNode;
-            if(initNode.left == null)
-            {
-                tempNodeParent = initNode.right;
-            }
-            else if(initNode.right == null)
-            {
-                tempNodeParent = initNode.left;
-            }
-            else
-            {
-                //find the largst on the left
-                let tempRemovenode = this.findMaxNode(initNode.left)
-                tempNodeParent.data = tempRemovenode.data;
-                tempNodeParent.key = tempRemovenode.key; 
-                initNode.left = this.removeNodeSecond(initNode.left, tempRemovenode.key);
-            }
-            return tempNodeParent;
-        }
+        // //if it passes this then the node is the key
+        // //check whether the node has a single child
+        // if(initNode.left == null)
+        // {
+        //     return initNode.right;
+        // }
+        // else if(initNode.right == null)
+        // {
+        //     return initNode.left;
+        // }
+        // //if passes all thes cases the node has no children
+        // else
+        // {
+        //     let tempNodeParent = initNode;
+        //     if(initNode.left == null)
+        //     {
+        //         tempNodeParent = initNode.right;
+        //     }
+        //     else if(initNode.right == null)
+        //     {
+        //         tempNodeParent = initNode.left;
+        //     }
+        //     else
+        //     {
+        //         // //find the largst on the left
+        //         // let tempRemovenode = this.findMaxNode(initNode.left)
+        //         // tempNodeParent.data = tempRemovenode.data;
+        //         // tempNodeParent.key = tempRemovenode.key; 
+        //         // initNode.left = this.removeNodeSecond(initNode.left, tempRemovenode.key);
+        //     }
+        //     return tempNodeParent;
+        // }
     }
-    findMaxNode(initNode)
+    findMinNode(initNode)
     {
         let tempNode = initNode;
-        while(tempNode.right != null)
+        while(tempNode.left != null)
         {
-            tempNode = tempNode.right;
+            tempNode = tempNode.left;
         }
         return tempNode;
     }
-    removeNodeSecond(initNode, initKey)
-    {
-        return this.removeHelper(initNode, initKey);
-    }
+    // removeNodeSecond(initNode, initKey)
+    // {
+    //     return this.removeHelper(initNode, initKey);
+    // }
 
     toStringRecursively(traveller, level) {
         let text = "";
