@@ -67,3 +67,34 @@ printBST("\nAfter Removing The root", tree);
 
 //adding after removeing root
 addPersonToBST(new Student("vilpotae", "George", "Harrison", 4.0), tree);
+
+//reset tree
+tree  = new BinarySearchTree(KEY_LENGTH);
+addPersonToBST(new Student("vilpotae", "George", "Harrison", 4.0), tree);
+addPersonToBST(new Employee("keusmvoe", "Paul", "McCartney", 80000), tree);
+addPersonToBST(new Employee("pzoaufcv", "Ringo", "Starr", 40000), tree);
+addPersonToBST(new Person("aeumdcsi", "Chuck", "Berry"), tree);
+addPersonToBST(new Student("sjeifvma", "Mick", "Jagger", 3.5), tree);
+addPersonToBST(new Student("zeuqhsmv", "Jimi", "Hendrix", 3.6), tree);
+addPersonToBST(new Person("peoqjeis", "Roger", "Waters"), tree);
+
+printBST("\nAfter Adding my own tests cases", tree);
+
+tree.removeValue("vilpotae");
+printBST("\nAfter Removing Root", tree);
+
+tree.removeValue("keusmvoe");
+tree.removeValue("pzoaufcv");
+tree.removeValue("aeumdcsi");
+tree.removeValue("zeuqhsmv");
+tree.removeValue("peoqjeis");
+
+printBST("\nAfter Removing everything", tree);
+
+addPersonToBST(new Person("peoqjeis", "Roger", "Waters"), tree);
+addPersonToBST(new Student("sjeifvma", "Jimi", "Hendrix", 3.6), tree);
+
+printBST("\nAfter Removing adding roger waters and repmacing Mick Jagger", tree);
+
+
+

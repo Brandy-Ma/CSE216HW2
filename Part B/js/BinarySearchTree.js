@@ -114,7 +114,7 @@ export default class BinarySearchTree {
     // @todo - YOU MUST DEFINE THIS METHOD
     removeValue(key) {
         //if you cant get the node stop
-        if(this.getValue(key)== null)
+        if(this.getValue(key) == null)
         {
             return;
         }
@@ -147,7 +147,6 @@ export default class BinarySearchTree {
             {
                 return initNode.left;
             }
-            //else it has both children
             else
             {
             //find the largst on the left
