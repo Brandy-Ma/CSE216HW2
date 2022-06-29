@@ -96,5 +96,6 @@ addPersonToBST(new Student("sjeifvma", "Jimi", "Hendrix", 3.6), tree);
 
 printBST("\nAfter Removing adding roger waters and repmacing Mick Jagger", tree);
 
+tree.removeValue("peoqjeis");
 
-
+printBST("\nAfter Removing", tree);
